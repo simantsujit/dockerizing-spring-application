@@ -6,3 +6,12 @@ services:
       - "27017:27017"
     volumes:
       - ./src/main/resources/data:/docker-entrypoint-initdb.d
+
+  job-service:
+    image: job-service
+    ports:
+      - "8090:8090"
+    depends_on:
+      - mongo
+    environment:
+      spring.data.mongodb.uri: "mongodb://jobUser:jobPswd@mongo:27017/job?authSource=job"
